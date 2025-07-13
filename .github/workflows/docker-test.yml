@@ -21,4 +21,4 @@ jobs:
 
       - name: Run tests inside Docker
         run: |
-          docker run --rm react-app-test npm run test
+          docker run --rm react-app-test npm run test -- --coverage
