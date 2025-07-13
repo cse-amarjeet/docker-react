@@ -1,0 +1,26 @@
+name: Build and Test React App in Docker
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image
+        run: |
+          docker build -t react-app-test -f Dockerfile.dev .
+
+      - name: Run tests inside Docker
+        run: |
+          docker run --rm react-app-test npm run test
